@@ -3,6 +3,7 @@
 import { useContext, useState } from "react"
 import {  navigate } from "../actions";
 import { UserContext } from "../context/UserContext";
+import { postLoginUser } from "@/api/fetchService";
 
 export async function setLocalStorage (token: string) {
   if (localStorage.getItem('token') === 'null') {
@@ -36,13 +37,7 @@ export default function LoginPage () {
 
   async function handleSubmit (e: any) {
     e.preventDefault()
-    const res = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(userInfo),
-    });
+    const res = await postLoginUser(userInfo);
     if (!res.ok) throw res;
   
     const data = await res.json();
