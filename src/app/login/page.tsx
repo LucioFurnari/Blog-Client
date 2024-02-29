@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import {  navigate } from "../actions";
+import { UserContext } from "../context/UserContext";
 
 export async function setLocalStorage (token: string) {
   if (localStorage.getItem('token') === 'null') {
@@ -13,6 +14,7 @@ export async function setLocalStorage (token: string) {
 
 
 export default function LoginPage () {
+  const { setIsLogged } = useContext(UserContext);
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -45,6 +47,7 @@ export default function LoginPage () {
   
     const data = await res.json();
     setLocalStorage(data.token);
+    setIsLogged(true);
     navigate()
   };
 
