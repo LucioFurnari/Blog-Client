@@ -1,15 +1,25 @@
 
 
 export async function getUserData (token: string) {
-  const res = await fetch('http://localhost:3000/api/session', {
+  try {
+    const res = await fetch('http://localhost:3000/api/session', {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }),
-  })
+    })
 
-  return res;
+
+    //todo: Change this.
+    if (res.status === null) {
+      throw new Error('Server not working')
+    }
+
+    return res;
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export async function postLoginUser(userLoginInfo: object) {
@@ -25,26 +35,44 @@ export async function postLoginUser(userLoginInfo: object) {
 }
 
 export async function getSession(token: string) {
-  const res = await fetch('http://localhost:3000/api/session', {
-    method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }),
-  });
-
-  return res;
+  try {
+    const res = await fetch('http://localhost:3000/api/session', {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    });
+  
+    //todo: Change this.
+    if (!res.ok) {
+      throw new Error('Server not working')
+    }
+    return res;
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export async function getPosts() {
-  const res = await fetch('http://localhost:3000/api/posts', {
-    next: {revalidate: 10},
+  try {
+    const res = await fetch('http://localhost:3000/api/posts', {
+    // next: {revalidate: 10},
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json'
-    })
-  });
+    }),
+    cache: 'no-store'
+    });
+    
+    //todo: Change this.
+    if (!res.ok) {
+      throw new Error('Server not working')
+    }
 
-  const data = await res.json();
-  return data;
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error)
+  }
 }
