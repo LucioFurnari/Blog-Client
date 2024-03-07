@@ -1,27 +1,4 @@
 
-
-export async function getUserData (token: string) {
-  try {
-    const res = await fetch('http://localhost:3000/api/session', {
-    method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }),
-    })
-
-
-    //todo: Change this.
-    if (res.status === null) {
-      throw new Error('Server not working')
-    }
-
-    return res;
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export async function postLoginUser(userLoginInfo: object) {
   const res = await fetch('http://localhost:3000/api/login', {
     method: 'POST',
@@ -43,11 +20,7 @@ export async function getSession(token: string) {
         'Authorization': `Bearer ${token}`
       }),
     });
-  
-    //todo: Change this.
-    if (!res.ok) {
-      throw new Error('Server not working')
-    }
+
     return res;
   } catch (error) {
     console.error(error)
