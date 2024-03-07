@@ -1,9 +1,7 @@
-'use client'
 
-import { useContext, useState } from "react"
-import {  navigate } from "../actions";
-import { UserContext } from "../context/UserContext";
+import { redirect } from "next/navigation";
 import { postLoginUser } from "@/api/fetchService";
+import { setToken } from "./actions";
 
 export async function setLocalStorage (token: string) {
   if (localStorage.getItem('token') === 'null') {
@@ -15,43 +13,29 @@ export async function setLocalStorage (token: string) {
 
 
 export default function LoginPage () {
-  const { setIsLogged } = useContext(UserContext);
-  const [userInfo, setUserInfo] = useState({
-    username: '',
-    password: '',
-  });
 
-  function handleUsername (e: { target: { value: string; }; }) {
-    setUserInfo({
-      ...userInfo,
-      username: e.target.value,
-    });
-  };
+  async function handleSubmit (formData: FormData) {
+    'use server'
 
-  function handlePassword (e: { target: { value: string; }; }) {
-    setUserInfo({
-      ...userInfo,
-      password: e.target.value,
-    })
-  }
+    const rawFormData = {
+      username: formData.get('username'),
+      password: formData.get('password')
+    }
+    const res = await postLoginUser(rawFormData);
 
-  async function handleSubmit (e: any) {
-    e.preventDefault()
-    const res = await postLoginUser(userInfo);
     if (!res.ok) throw res;
-  
+
     const data = await res.json();
-    setLocalStorage(data.token);
-    setIsLogged(true);
-    navigate()
+    setToken(data.token)
+    redirect('/')
   };
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <label htmlFor="username">Username</label>
-        <input className="text-black" onChange={handleUsername} id="username" type="text" placeholder="Username"></input>
-        <input className="text-black" onChange={handlePassword} type="password" placeholder="Password"></input>
+        <input className="text-black" name="username" id="username" type="text" placeholder="Username"></input>
+        <input className="text-black" name="password" type="password" placeholder="Password"></input>
         <button type="submit">Login</button>
       </form>
     </main>
