@@ -49,3 +49,20 @@ export async function getPosts() {
     return [];
   }
 }
+
+export async function getPost(postId: string) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    
+  }
+}
