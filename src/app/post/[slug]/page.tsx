@@ -1,7 +1,10 @@
-export default function Post({ params }: { params: { slug: string } }) {
+import { getPost} from "@/api/fetchService"
+import PostPage from "@/components/Post";
+
+export default async function Post({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug);
+  
   return (
-    <main>
-      <h1>This is a post</h1>
-    </main>
+    <PostPage {...post} id={params.slug}/>
   )
 }
