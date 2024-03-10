@@ -66,3 +66,20 @@ export async function getPost(postId: string) {
     
   }
 }
+
+export async function getComments(postId: string) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
+    
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    
+  }
+}
