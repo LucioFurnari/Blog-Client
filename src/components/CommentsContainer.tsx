@@ -7,6 +7,7 @@ export default async function CommentsContainer (props: {postId: string}) {
   return (
     <div>
     {
+      comments.length > 0 &&
       comments.map((comment: {
         _id: string,
         author: string,
