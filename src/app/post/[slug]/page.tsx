@@ -5,6 +5,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const post = await getPost(params.slug);
   
   return (
-    <PostPage {...post} id={params.slug}/>
+    <PostPage title={post.title} author={post.author} text={post.text} id={params.slug} />
   )
 }
