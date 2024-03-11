@@ -1,7 +1,6 @@
 import PostCard from "./PostCard";
 import { getPosts } from "@/api/fetchService";
 
-
 export default async function Main () {
   const posts = await getPosts();
 
@@ -11,7 +10,7 @@ export default async function Main () {
       <section className=" w-full grid grid-cols-4 grid-rows-[300px_300px_300px] gap-4">
       {
         posts.length > 0 ?
-        posts.map((item: {
+        posts.map((post: {
           _id: string,
           title: string,
           text: string,
@@ -19,7 +18,7 @@ export default async function Main () {
           timestamp: string
         }, index: number) => {
           return (
-            <PostCard key={index} {...item} />
+              <PostCard key={post._id} {...post} />
           )
         })
         : 
