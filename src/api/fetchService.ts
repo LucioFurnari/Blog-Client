@@ -1,5 +1,6 @@
 enum Endpoints {
   Login = 'login',
+  Register = 'register',
   Session = 'session',
   Posts = 'posts',
   Comments = 'comments'
@@ -15,6 +16,19 @@ export async function postLoginUser(userLoginInfo: object) {
     body: JSON.stringify(userLoginInfo),
   });
 
+  return res;
+}
+
+// Function to register user
+export async function postRegisterUser(userRegisterInfo: object) {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL_DEV+Endpoints.Register, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(userRegisterInfo),
+  })
+  
   return res;
 }
 
