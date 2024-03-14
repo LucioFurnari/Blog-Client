@@ -1,15 +1,15 @@
 'use client'
 
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-import { getUserData } from "../../api/fetchService"
+import { getSession } from "../../api/fetchService"
+import { createContext, useState } from "react"
+import { getToken } from "@/components/actions"
 
-import { createContext, useEffect, useState } from "react"
 type  UserContent = {
-  user: string,
-  setUser: (user: string) => void,
+  user: string | null,
+  setUser: (user: null) => void,
   isLogged: boolean,
-  setIsLogged:(c: boolean) => void
+  setIsLogged:(c: boolean) => void,
+  listenStorageChange: () => void,
 }
 export const UserContext = createContext<UserContent>({} as UserContent);
 
@@ -19,33 +19,31 @@ export function UserProvider ({
   children: React.ReactNode;
 }>) {
   const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const listenStorageChange = async () => {
-      const token = localStorage.getItem('token');
-      if (token !== null) {
-      const res = await getUserData(token);
-
-      if (res.status === 403) {
-        setIsLogged(false)
-        return
+  const listenStorageChange = async () => {
+    try {
+      const token = await getToken();
+      if (token !== undefined) {
+      const res = await getSession(token);
+      //todo: Change this
+      if (typeof res === 'undefined') {
+        throw new Error('Server not working')
       }
-      const data = await res.json()
-      setUser(data.user_name);
-      } else {
-        setIsLogged(false)
+      if (res.ok) {
+        const data = await res.json()
+        setUser(data.username)
       }
+      }
+    } catch (error) {
+      console.error(error)
     }
-      listenStorageChange()
-  }, [])
+  }
 
   return (
-    <UserContext.Provider value={{user, setUser, setIsLogged, isLogged}}>
+    <UserContext.Provider value={{user, setUser, setIsLogged, isLogged, listenStorageChange}}>
       <>
-        <Navbar/>
         {children}
-        <Footer />
       </>
     </UserContext.Provider>
   )
