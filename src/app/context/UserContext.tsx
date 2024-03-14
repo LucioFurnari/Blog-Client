@@ -1,7 +1,7 @@
 'use client'
 
 import { getSession } from "../../api/fetchService"
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { getToken } from "@/components/actions"
 
 type  UserContent = {
@@ -10,6 +10,7 @@ type  UserContent = {
   isLogged: boolean,
   setIsLogged:(c: boolean) => void,
   listenStorageChange: () => void,
+  deleteUser: () => void,
 }
 export const UserContext = createContext<UserContent>({} as UserContent);
 
@@ -20,6 +21,11 @@ export function UserProvider ({
 }>) {
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    listenStorageChange()
+    setIsLogged(true)
+  },[])
 
   const listenStorageChange = async () => {
     try {
@@ -40,8 +46,12 @@ export function UserProvider ({
     }
   }
 
+  const deleteUser = () => {
+    setUser(null);
+  }
+
   return (
-    <UserContext.Provider value={{user, setUser, setIsLogged, isLogged, listenStorageChange}}>
+    <UserContext.Provider value={{user, setUser, setIsLogged, isLogged, listenStorageChange, deleteUser}}>
       <>
         {children}
       </>
