@@ -1,24 +1,16 @@
-import { postLoginUser } from "@/api/fetchService";
-import { setToken } from "@/app/login/actions";
-import { redirect } from "next/navigation";
+'use client'
+
+import { UserContext } from "@/app/context/UserContext";
+import { useContext } from "react";
+import { handleLogin } from "./actions";
 
 export default function LoginForm () {
-  async function handleSubmit (formData: FormData) {
-    'use server'
+  const { listenStorageChange } = useContext(UserContext)
 
-    const rawFormData = {
-      username: formData.get('username'),
-      password: formData.get('password')
-    }
-    const res = await postLoginUser(rawFormData);
-
-    if (!res.ok) throw res;
-
-    const data = await res.json();
-    setToken(data.token)
-    redirect('/')
-  };
-
+  function handleSubmit (formData: FormData ) {
+    handleLogin(formData)
+    listenStorageChange()
+  }
 
   return (
     <form action={handleSubmit}>
