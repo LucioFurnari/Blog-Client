@@ -9,7 +9,7 @@ interface CommentProp {
 }
 
 
-export function CommentList (props: { comments: CommentProp[] }) {
+export function CommentList (props: { comments: CommentProp[], group: any, getReplies: any }) {
   return props.comments.map((comment: {
     _id: string,
     author: string,
@@ -19,7 +19,7 @@ export function CommentList (props: { comments: CommentProp[] }) {
   }) => {
     return (
       <div key={comment._id}>
-        <Comment _id={comment._id} author={comment.author} text={comment.text} timestamp={comment.timestamp} response_to={comment.response_to} />
+        <Comment {...comment} group={props.group} getReplies={props.getReplies} />
       </div>
     )
   })
