@@ -23,7 +23,7 @@ interface GroupObject {
     group[String(comment.response_to)] ||= []; // Initialize to an empty array if undefined or null
     group[String(comment.response_to)].push(comment);
   });
-  function getParentId(id:string) {
+  function getReplies(id:string) {
     return group[id];
   }
   // Object.keys(group).forEach((key) => {
@@ -38,7 +38,7 @@ interface GroupObject {
   return (
     <div className=" border-lime-100 border-2">
     {
-      <CommentList comments={rootComments} />
+      <CommentList comments={rootComments} group={group} getReplies={getReplies}/>
     }
     </div>
   )
