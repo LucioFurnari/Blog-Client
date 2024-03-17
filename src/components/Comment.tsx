@@ -1,3 +1,4 @@
+import { CommentList } from "./CommentList";
 
 export default function Comment (commentProps: {
   _id: string,
@@ -5,9 +6,14 @@ export default function Comment (commentProps: {
   text: string,
   timestamp: string,
   response_to: string,
+  group: any,
+  getReplies: any,
 }) {
 
+  const childComments = commentProps.getReplies(commentProps._id);
+
   return (
+  <>
     <div className=" border-2 border-red-400">
       <div>
         <span className="mr-10">{commentProps.author}</span>
@@ -15,5 +21,15 @@ export default function Comment (commentProps: {
       </div>
       <p>{commentProps.text}</p>
     </div>
+    {
+      childComments?.length > 0 && (
+        <>
+          <div className="ml-14">
+            <CommentList comments={childComments} group={commentProps.group} getReplies={commentProps.getReplies} />
+          </div>
+        </>
+      )
+    }
+  </>
   )
 }
