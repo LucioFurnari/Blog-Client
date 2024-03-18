@@ -1,5 +1,4 @@
 import { getComments } from "@/api/fetchService";
-import Comment from "./Comment";
 import { CommentList } from "./CommentList";
 
 export default async function CommentsContainer (props: {postId: string}) {
@@ -13,33 +12,31 @@ export default async function CommentsContainer (props: {postId: string}) {
     response_to: string;
 }
 
-interface GroupObject {
-  [key: string]: Comment[], // Specifies that each key maps to an array of Comment objects or null
-}
+  interface GroupObject {
+    [key: string]: Comment[],
+  }
 
-  const group: GroupObject = {};
-
-  comments.forEach((comment: Comment) => {
-    group[String(comment.response_to)] ||= []; // Initialize to an empty array if undefined or null
-    group[String(comment.response_to)].push(comment);
-  });
   function getReplies(id:string) {
     return group[id];
   }
-  // Object.keys(group).forEach((key) => {
-  //   let res;
-  //   if (key !== null) {
-  //     res = getParentId(key)
-  //   }
-  //   console.log(res)
-  // });
+
+  const group: GroupObject = {};
+
+  if (comments.length > 0) {
+    comments.forEach((comment: Comment) => {
+      group[String(comment.response_to)] ||= []; // Initialize to an empty array if undefined or null
+      group[String(comment.response_to)].push(comment);
+    });
+  }
+
   const rootComments = group['null']
 
   return (
-    <div className=" border-lime-100 border-2">
+    <>
     {
+      rootComments.length > 0 &&
       <CommentList comments={rootComments} group={group} getReplies={getReplies}/>
     }
-    </div>
+    </>
   )
 }
