@@ -8,10 +8,10 @@ export default function PostPage (props: {
 },
 ) {
   return (
-    <main>
-    <h1>{props.title}</h1>
-    <p>{props.author}</p>
-    <p>{props.text}</p>
+  <main className="  px-96">
+    <h1 className=" text-4xl">{props.title}</h1>
+    <p>Author: <span>{props.author}</span></p>
+    <p className="my-10">{props.text}</p>
     <CommentsContainer postId={props.id}/>
   </main>
   )
