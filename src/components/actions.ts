@@ -1,6 +1,6 @@
 'use server'
 
-import { postLoginUser } from "@/api/fetchService";
+import { postLoginUser, getComments } from "@/api/fetchService";
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 
@@ -38,3 +38,8 @@ export async function handleLogin (formData: FormData) {
   setToken(data.token)
   redirect('/')
 };
+
+export async function getNewComments(postId: string) {
+  const newComments = await getComments(postId);
+  return newComments;
+}
