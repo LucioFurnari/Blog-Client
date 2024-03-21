@@ -1,25 +1,21 @@
 'use client'
 
-import { getComments } from "@/api/fetchService";
 import { CommentList } from "./CommentList";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { getNewComments } from "./actions";
 
-// async function useGetComments(postId: string) {
-//   return await getComments(postId)
-// }
 
 export default function CommentsContainer (props: {postId: string}) {
+  const {postId} = props;
   const [comments, setComments] = useState([]);
 
-  //todo: change this
-  async function getNewComments(postId: string) {
-    const newComments = await getComments(postId)
-    setComments(newComments);
-  }
-
   useEffect(() => {
-    getNewComments(props.postId)
-  },[props.postId]);
+    async function handleComments(postId: string) {
+      const newComments = await getNewComments(postId);
+      setComments(newComments)
+    }
+    handleComments(postId);
+  }, [postId])
 
   interface Comment {
     _id: string;
