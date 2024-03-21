@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from "react";
 import { CommentList } from "./CommentList";
 
 export default function Comment (commentProps: {
@@ -9,19 +12,31 @@ export default function Comment (commentProps: {
   group: any,
   getReplies: any,
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleOpenResponse () {
+    setIsOpen((value) => !value)
+  }
 
   const childComments = commentProps.getReplies(commentProps._id);
 
   return (
   <>
-    <div className=" border-2 border-red-400">
+    <div className="border-l-[1px] border-white my-2 p-4">
       <div>
         <span className="mr-10">{commentProps.author}</span>
         <span>{commentProps.timestamp}</span>
       </div>
-      <p>{commentProps.text}</p>
+      <p className="py-4 mt-4">{commentProps.text}</p>
     </div>
     {
+      childComments?.length > 0 &&
+      <button onClick={handleOpenResponse}>
+        {!isOpen ? 'Open' : 'Close'}
+      </button>
+    }
+    {
+      isOpen &&
       childComments?.length > 0 && (
         <>
           <div className="ml-14">
