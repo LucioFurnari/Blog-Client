@@ -34,11 +34,16 @@ export default function Tiptap () {
   }, [editor])
 
   function handleItalic() {
-    editor?.chain().focus().toggleItalic().run()
+    editor?.chain().focus().toggleItalic().run();
+  }
+
+  function handleBold() {
+    editor?.chain().focus().toggleBold().run();
   }
   return (
     <>
     <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('italic') ? 'bg-white text-black' : 'border-white'}`} onClick={handleItalic}>Italic</button>
+    <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('bold') ? 'bg-white text-black' : 'border-white'}`} onClick={handleBold}>Bold</button>
     <EditorContent editor={editor} />
     <p>{editorContent}</p>
     </>
