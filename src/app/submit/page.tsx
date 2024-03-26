@@ -40,11 +40,16 @@ export default function Tiptap () {
   function handleBold() {
     editor?.chain().focus().toggleBold().run();
   }
+
+  function handleBulletList() {
+    editor?.chain().focus().toggleBulletList().run();
+  }
   return (
     <>
     <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('italic') ? 'bg-white text-black' : 'border-white'}`} onClick={handleItalic}>Italic</button>
     <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('bold') ? 'bg-white text-black' : 'border-white'}`} onClick={handleBold}>Bold</button>
-    <EditorContent editor={editor} />
+    <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('bulletList') ? 'bg-white text-black' : 'border-white'}`} onClick={handleBulletList}>Bullet List</button>
+    <EditorContent editor={editor} className="prose prose-sm text-white"/>
     <p>{editorContent}</p>
     </>
   )
