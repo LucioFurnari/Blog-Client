@@ -1,9 +1,9 @@
-import TextEditor from "./TextEditor"
+import CreatePostForm from "./CreatePostForm"
 
 export default function SubmitPostPage() {
   return(
     <main className="flex flex-row justify-center">
-      <TextEditor />
+      <CreatePostForm />
     </main>
   )
 }
