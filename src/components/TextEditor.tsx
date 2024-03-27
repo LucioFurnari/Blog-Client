@@ -1,9 +1,10 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
+import parse from 'html-react-parser';
 
-export default function TextEditor() {
-  const [editorContent, setEditorContent] = useState('')
+export default function TextEditor(props: { setEditorContent: (value: {}) => void}) {
+  const { setEditorContent } = props;
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -17,24 +18,11 @@ export default function TextEditor() {
         class: 'border-[1px] border-white h-40 p-2' 
       }
     },
-    onUpdate({ editor }) {
-      setEditorContent(editor.getText());
-      console.log(editor.getJSON());
-    }
+    content: '<p>Write your post</p>',
+    onUpdate({editor}) {
+      setEditorContent(editor.getJSON())
+    },
   });
-  useEffect(() => {
-    editor?.commands.setContent([
-      {
-        "type": "paragraph",
-        "content": [
-          {
-            "type": "text",
-            "text": "It’s 19871. You can’t turn on a radio, or go to a mall without hearing Olivia Newton-John’s hit song, Physical."
-          }
-        ]
-      }
-    ])
-  }, [editor])
 
   function handleItalic() {
     editor?.chain().focus().toggleItalic().run();
@@ -54,7 +42,6 @@ export default function TextEditor() {
       <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('bold') ? 'bg-white text-black' : 'border-white'}`} onClick={handleBold}>Bold</button>
       <button className={`rounded-md border-[1px] p-2 ${editor?.isActive('bulletList') ? 'bg-white text-black' : 'border-white'}`} onClick={handleBulletList}>Bullet List</button>
       <EditorContent editor={editor} className="prose prose-sm text-white"/>
-      <p>{editorContent}</p>
     </section>
   )
 }
