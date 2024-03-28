@@ -1,6 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import parse from 'html-react-parser';
 
 export default function TextEditor(props: { setEditorContent: (value: {}) => void}) {
   const { setEditorContent } = props;
