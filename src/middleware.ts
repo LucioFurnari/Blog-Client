@@ -20,5 +20,5 @@ export async function middleware(request: NextRequest) {
 
 //todo: Change the route
 export const config = {
-  matcher: ['/post/create']
+  matcher: ['/submit']
 }
