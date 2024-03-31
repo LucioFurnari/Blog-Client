@@ -24,18 +24,6 @@ export default function TextEditor(props: { setEditorContent: (value: {}) => voi
     },
   });
 
-  function handleItalic() {
-    editor?.chain().focus().toggleItalic().run();
-  }
-
-  function handleBold() {
-    editor?.chain().focus().toggleBold().run();
-  }
-
-  function handleBulletList() {
-    editor?.chain().focus().toggleBulletList().run();
-  }
-
   return (
     <section>
       <ButtonsContainer editor={editor} />
