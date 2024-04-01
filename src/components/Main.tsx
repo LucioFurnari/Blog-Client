@@ -1,4 +1,4 @@
-import PostCardContainer from "./PostCardContainer";
+import PostCardContainer from "./PostCard/PostCardContainer";
 import { getPosts } from "@/api/fetchService";
 
 export default async function Main () {
