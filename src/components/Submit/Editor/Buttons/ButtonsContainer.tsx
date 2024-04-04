@@ -22,10 +22,10 @@ export default function ButtonsContainer(props: { editor: Editor | null}) {
 
   return (
     <div>
-      <EditorButton name={'Italic'} editor={editor} handleFunction={handleItalic} />
-      <EditorButton name={'Bold'} editor={editor} handleFunction={handleBold} /> 
-      <EditorButton name={'Bullet List'} editor={editor} handleFunction={handleBulletList} />
-      <EditorButton name={'Code'} editor={editor} handleFunction={handleCode}/>
+      <EditorButton name={'Italic'} activeClass={'italic'} editor={editor} handleFunction={handleItalic} />
+      <EditorButton name={'Bold'} activeClass={'bold'} editor={editor} handleFunction={handleBold} /> 
+      <EditorButton name={'Bullet List'} activeClass={'bulletList'} editor={editor} handleFunction={handleBulletList} />
+      <EditorButton name={'Code'} activeClass={'code'} editor={editor} handleFunction={handleCode}/>
     </div>
   )
 }
