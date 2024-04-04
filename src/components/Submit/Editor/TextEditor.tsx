@@ -15,7 +15,7 @@ export default function TextEditor(props: { setEditorContent: (value: {}) => voi
     ],
     editorProps: {
       attributes: {
-        class: 'border-[1px] border-white h-40 p-2' 
+        class: 'border-[1px] border-white h-40 p-2 xl:w-[800px] md:w-[600px] sm:w-[400px]' 
       }
     },
     content: '<p>Write your post</p>',
@@ -25,9 +25,11 @@ export default function TextEditor(props: { setEditorContent: (value: {}) => voi
   });
 
   return (
-    <section>
+    <section className="xl:w-[800px] md:w-[600px] sm:w-[400px]">
       <ButtonsContainer editor={editor} />
       <EditorContent editor={editor} className="prose prose-sm text-white"/>
     </section>
   )
 }
+
+// xl:w-[800px] md:w-[600px] w-full
