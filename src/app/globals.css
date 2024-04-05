@@ -12,18 +12,24 @@
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-end-rgb: rgb(25,25,25);
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  background-color: var(--background-end-rgb);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  margin: 0;
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    ) */
+    /* rgb(var(--background-start-rgb)); */
 }
 
 @layer utilities {
