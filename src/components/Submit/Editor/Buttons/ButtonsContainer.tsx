@@ -40,11 +40,21 @@ export default function ButtonsContainer(props: { editor: Editor | null}) {
     editor?.chain().focus().toggleHeading({ level: 3}).run();
   }
 
+  function handleOrderedList() {
+    editor?.chain().focus().toggleOrderedList().run();
+  }
+
+  function handleStrike() {
+    editor?.chain().focus().toggleStrike().run();
+  }
+
   return (
     <div>
       <EditorButton name={'Italic'} activeClass={'italic'} editor={editor} handleFunction={handleItalic} />
-      <EditorButton name={'Bold'} activeClass={'bold'} editor={editor} handleFunction={handleBold} /> 
+      <EditorButton name={'Bold'} activeClass={'bold'} editor={editor} handleFunction={handleBold} />
+      <EditorButton name={'Strike'} activeClass={'strike'} editor={editor} handleFunction={handleStrike}/>
       <EditorButton name={'Bullet List'} activeClass={'bulletList'} editor={editor} handleFunction={handleBulletList} />
+      <EditorButton name={'Ordered List'} activeClass={'orderedList'} editor={editor} handleFunction={handleOrderedList}/>
       <EditorButton name={'Code'} activeClass={'code'} editor={editor} handleFunction={handleCode}/>
       <EditorButton name={'Blockqoute'} activeClass={'blockquote'} editor={editor} handleFunction={handleBlockqoute} />
       <EditorButton name={'Codeblock'} activeClass={'codeBlock'} editor={editor} handleFunction={handleCodeBlock}/>
