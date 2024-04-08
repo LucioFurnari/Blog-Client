@@ -29,9 +29,9 @@ export default function CreatePostForm() {
   }
   
   return(
-    <form onSubmit={createPost}>
+    <form className="flex flex-col items-end" onSubmit={createPost}>
       <TextEditor setEditorContent={setEditorContent}/>
-      <button type="submit">Create post</button>
+      <button className="mt-4 p-4 rounded-md border-[1px] border-white hover:bg-white hover:text-black" type="submit">Create post</button>
     </form>
   )
 }
