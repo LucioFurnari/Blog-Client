@@ -15,7 +15,7 @@ export default function TextEditor(props: { setEditorContent: (value: {}) => voi
     ],
     editorProps: {
       attributes: {
-        class: 'border-[1px] border-white h-40 p-2 xl:w-[800px] md:w-[600px] sm:w-[400px] text-white' 
+        class: 'border-[1px] border-white rounded-md h-60 overflow-auto p-2 xl:w-[800px] md:w-[600px] sm:w-[400px] text-white mt-4' 
       }
     },
     content: '<p>Write your post</p>',
