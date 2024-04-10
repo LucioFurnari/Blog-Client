@@ -3,7 +3,7 @@ import PostCard from "./PostCard"
 export default function PostCardContainer (props: { posts: []}) {
   const { posts } = props;
   return (
-    <section className=" w-full grid grid-cols-4 grid-rows-1 md:grid-rows-[300px_300px] xl:grid-rows-[300px_300px_300px] gap-4">
+    <section className=" w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
     {
       posts.length > 0 ?
       posts.map((post: {
