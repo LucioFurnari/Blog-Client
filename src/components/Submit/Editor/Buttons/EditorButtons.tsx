@@ -4,7 +4,7 @@ export function EditorButton(props: { name: string, editor: Editor | null, handl
   const { name, editor, handleFunction, activeClass } = props;
 
   return (
-    <button className={`rounded-md border-[1px] p-2 ${editor?.isActive(activeClass) ? 'bg-white text-black' : 'border-white'}`} onClick={handleFunction}>
+    <button type="button" className={`rounded-md border-[1px] p-2 ${editor?.isActive(activeClass) ? 'bg-white text-black' : 'border-white'}`} onClick={handleFunction}>
       {name}
     </button>
   )
@@ -14,7 +14,7 @@ export function EditorHeaderButton(props: { name: string, editor: Editor | null,
   const { name, editor, handleFunction, activeClass, headerLevel} = props;
 
   return(
-    <button className={`rounded-md border-[1px] p-2 ${editor?.isActive(activeClass, { level: headerLevel}) ? 'bg-white text-black' : 'border-white'}`} onClick={handleFunction}>
+    <button type="button" className={`rounded-md border-[1px] p-2 ${editor?.isActive(activeClass, { level: headerLevel}) ? 'bg-white text-black' : 'border-white'}`} onClick={handleFunction}>
       {name}
     </button>
   )
