@@ -23,10 +23,10 @@ export default function PostPage (props: {
   }, [props.body]);
 
   return (
-  <main className="  px-96">
-    <h1 className=" text-4xl">{props.title}</h1>
+  <main className=" px-96">
+    <h1 className="text-4xl">{props.title}</h1>
     <p>Author: <span>{props.author}</span></p>
-    <div className="my-10 prose prose-sm text-white">
+    <div className="my-10 prose dark:prose-invert prose-sm text-white ">
       {output && parse(output)}
     </div>
     <CommentsContainer postId={props.id}/>
