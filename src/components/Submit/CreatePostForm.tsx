@@ -4,6 +4,7 @@ import { getToken } from "../actions"
 
 export default function CreatePostForm() {
   const [editorContent, setEditorContent] = useState({})
+  const [postTitle, setPostTitle] = useState('');
 
   //todo: Move this function
   async function createPost(event: any) {
@@ -17,8 +18,7 @@ export default function CreatePostForm() {
           'authorization': 'Bearer ' + token,
         }),
         body: JSON.stringify({
-          title: 'New post',
-          text: 'This is optional :P',
+          title: postTitle,
           body: editorContent,
           timestamp: '24 de Diciembre',
         }),
@@ -30,7 +30,7 @@ export default function CreatePostForm() {
   
   return(
     <form className="flex flex-col items-end" onSubmit={createPost}>
-      <TextEditor setEditorContent={setEditorContent}/>
+      <TextEditor setEditorContent={setEditorContent} setTitle={setPostTitle} />
       <button className="mt-4 p-4 rounded-md border-[1px] border-white hover:bg-white hover:text-black" type="submit">Create post</button>
     </form>
   )
