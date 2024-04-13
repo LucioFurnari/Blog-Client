@@ -1,9 +1,10 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ButtonsContainer from "./Buttons/ButtonsContainer";
+import PostTitleInput from "./Input/PostTitleInput";
 
-export default function TextEditor(props: { setEditorContent: (value: {}) => void}) {
-  const { setEditorContent } = props;
+export default function TextEditor(props: { setEditorContent: (value: {}) => void, setTitle: (value: string) => void}) {
+  const { setEditorContent, setTitle } = props;
 
   const editor = useEditor({
     extensions: [
@@ -24,9 +25,14 @@ export default function TextEditor(props: { setEditorContent: (value: {}) => voi
     },
   });
 
+  function handleTitleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setTitle(e.target.value);
+  }
+
   return (
     <section className="xl:w-[800px] md:w-[600px] sm:w-[400px]">
       <ButtonsContainer editor={editor} />
+      <PostTitleInput setTitle={handleTitleInput}/>
       <EditorContent editor={editor} className="prose dark:prose-invert prose-sm text-white"/>
     </section>
   )
