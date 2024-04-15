@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { getNewComments } from "../../actions";
 
 
-export default function CommentsContainer (props: {postId: string}) {
-  const {postId} = props;
+export default function CommentsContainer (props: {postId: string, refreshComments: boolean}) {
+  const {postId, refreshComments} = props;
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function CommentsContainer (props: {postId: string}) {
       setComments(newComments)
     }
     handleComments(postId);
-  }, [postId])
+  }, [postId, refreshComments])
 
   interface Comment {
     _id: string;
