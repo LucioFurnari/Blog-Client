@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CommentsContainer from "./Comments/CommentsContainer";
+import CreateComment from "./Comments/CreateComment";
 import { JSONContent, generateHTML } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import parse from 'html-react-parser';
@@ -22,14 +23,17 @@ export default function PostPage (props: {
     }
   }, [props.body]);
 
+  const [refreshComments, setRefreshComments] = useState(false);
+
   return (
-  <main className=" px-96">
+  <main className=" px-96 min-h-96">
     <h1 className="text-4xl">{props.title}</h1>
     <p>Author: <span>{props.author}</span></p>
     <div className="my-10 prose dark:prose-invert prose-sm text-white ">
       {output && parse(output)}
     </div>
-    <CommentsContainer postId={props.id}/>
+    <CreateComment setRefresh={setRefreshComments} postId={props.id} />
+    <CommentsContainer postId={props.id} refreshComments={refreshComments}/>
   </main>
   )
 }
