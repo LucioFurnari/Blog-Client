@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CommentList } from "./CommentList";
+import ReplySection from "./Reply/ReplySection";
 
 export default function Comment (commentProps: {
   _id: string,
@@ -22,13 +23,14 @@ export default function Comment (commentProps: {
 
   return (
   <>
-    <div className="border-l-[1px] border-white my-2 p-4">
+    <div className="border-l-[1px] border-white my-6 p-4">
       <div>
         <span className="mr-10">{commentProps.author}</span>
         <span>{commentProps.timestamp}</span>
       </div>
       <p className="py-4 mt-4">{commentProps.text}</p>
     </div>
+    <ReplySection />
     {
       childComments?.length > 0 &&
       <button onClick={handleOpenResponse}>
