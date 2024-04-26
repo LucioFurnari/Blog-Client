@@ -6,6 +6,6 @@ export default function ReplyButton(props: {setValue: (value: any)  => void}) {
   }
 
   return (
-    <button onClick={handleOpenReply}>Reply</button>
+    <button type="button" onClick={handleOpenReply}>Reply</button>
   )
 };
