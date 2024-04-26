@@ -48,7 +48,7 @@ export default function CommentsContainer (props: {postId: string, refreshCommen
     <>
     {
       rootComments &&
-      <CommentList comments={rootComments} group={group} getReplies={getReplies}/>
+      <CommentList postId={postId} comments={rootComments} group={group} getReplies={getReplies}/>
     }
     </>
   )
