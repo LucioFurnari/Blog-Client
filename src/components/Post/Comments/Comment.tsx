@@ -12,6 +12,7 @@ export default function Comment (commentProps: {
   response_to: string,
   group: any,
   getReplies: any,
+  postId: string,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,7 +31,7 @@ export default function Comment (commentProps: {
       </div>
       <p className="py-4 mt-4">{commentProps.text}</p>
     </div>
-    <ReplySection />
+    <ReplySection postId={commentProps.postId} replyUser={commentProps._id} />
     {
       childComments?.length > 0 &&
       <button onClick={handleOpenResponse}>
@@ -42,7 +43,7 @@ export default function Comment (commentProps: {
       childComments?.length > 0 && (
         <>
           <div className="ml-14">
-            <CommentList comments={childComments} group={commentProps.group} getReplies={commentProps.getReplies} />
+            <CommentList postId={commentProps.postId} comments={childComments} group={commentProps.group} getReplies={commentProps.getReplies} />
           </div>
         </>
       )
