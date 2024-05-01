@@ -41,12 +41,14 @@ export default function CreateComment(props: { postId: string, setRefresh: (valu
 
   return (
     <section>
-      <button onClick={handleActiveComment}>Create comment</button>
+      <button className=" bg-gray-600 rounded-md p-2 px-4 hover:bg-gray-500" onClick={handleActiveComment}>Create comment</button>
       {
         activeComment &&
         <div>
           <form onSubmit={createComment}>
-            <textarea onChange={handleCommentContent} className="block text-black"
+            <textarea
+              className="p-2 px-4 my-4 block bg-transparent border-[1px] border-white rounded-md min-h-32 w-80"
+              onChange={handleCommentContent}
             />
             <button type="submit">Comment</button>
           </form>
