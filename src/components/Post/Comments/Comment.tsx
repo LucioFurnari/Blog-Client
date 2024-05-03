@@ -34,7 +34,7 @@ export default function Comment (commentProps: {
     <ReplySection postId={commentProps.postId} replyUser={commentProps._id} />
     {
       childComments?.length > 0 &&
-      <button onClick={handleOpenResponse}>
+      <button className="ml-6" onClick={handleOpenResponse}>
         {!isOpen ? 'Open' : 'Close'}
       </button>
     }
