@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CommentList } from "./CommentList";
 import ReplySection from "./Reply/ReplySection";
+import { OpenCommentButton, CloseCommentButton } from "./Buttons/CommentButtons";
 
 export default function Comment (commentProps: {
   _id: string,
@@ -34,9 +35,12 @@ export default function Comment (commentProps: {
     <ReplySection postId={commentProps.postId} replyUser={commentProps._id} />
     {
       childComments?.length > 0 &&
-      <button className="ml-6" onClick={handleOpenResponse}>
-        {!isOpen ? 'Open' : 'Close'}
-      </button>
+      <>
+        {!isOpen ? <OpenCommentButton /> : <CloseCommentButton />}
+      </>
+      // <button className="ml-6" onClick={handleOpenResponse}>
+      //   {!isOpen ? 'Open' : 'Close'}
+      // </button>
     }
     {
       isOpen &&
