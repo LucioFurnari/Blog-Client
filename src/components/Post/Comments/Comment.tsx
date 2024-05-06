@@ -36,11 +36,8 @@ export default function Comment (commentProps: {
     {
       childComments?.length > 0 &&
       <>
-        {!isOpen ? <OpenCommentButton /> : <CloseCommentButton />}
+        {!isOpen ? <OpenCommentButton action={handleOpenResponse}/> : <CloseCommentButton action={handleOpenResponse}/>}
       </>
-      // <button className="ml-6" onClick={handleOpenResponse}>
-      //   {!isOpen ? 'Open' : 'Close'}
-      // </button>
     }
     {
       isOpen &&
