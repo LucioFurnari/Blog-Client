@@ -12,17 +12,21 @@ function CiAddMinusSquare(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function OpenCommentButton() {
+export function OpenCommentButton(props: { action: () => void}) {
+  const { action } = props;
+
   return (
-    <button>
+    <button className="ml-6" onClick={action}>
       <CiAddPlusCircle />
     </button>
   )
 }
 
-export function CloseCommentButton() {
+export function CloseCommentButton(props: { action: () => void}) {
+  const { action } = props;
+
   return (
-    <button>
+    <button className="ml-6" onClick={action}>
       <CiAddMinusSquare />
     </button>
   )
