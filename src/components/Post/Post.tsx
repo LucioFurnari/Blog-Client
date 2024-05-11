@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from "react";
+import { UserContext } from "@/app/context/UserContext";
+import { useMemo, useState, useContext } from "react";
 import CommentsContainer from "./Comments/CommentsContainer";
 import CreateComment from "./Comments/CreateComment";
 import { JSONContent, generateHTML } from "@tiptap/react";
@@ -15,6 +16,10 @@ export default function PostPage (props: {
   id: string,
 },
 ) {
+  const {title, author, text,body, id} = props;
+  const { setPostId } = useContext(UserContext);
+  setPostId(id);
+
   const output = useMemo(() => {
     if (props.body) {
       return generateHTML(props.body, [
@@ -27,13 +32,13 @@ export default function PostPage (props: {
 
   return (
   <main className=" px-96 min-h-96">
-    <h1 className="text-4xl">{props.title}</h1>
-    <p>Author: <span>{props.author}</span></p>
+    <h1 className="text-4xl">{title}</h1>
+    <p>Author: <span>{author}</span></p>
     <div className="my-10 prose dark:prose-invert prose-sm text-white ">
       {output && parse(output)}
     </div>
-    <CreateComment setRefresh={setRefreshComments} postId={props.id} />
-    <CommentsContainer postId={props.id} refreshComments={refreshComments}/>
+    <CreateComment setRefresh={setRefreshComments} postId={id} />
+    <CommentsContainer postId={id} refreshComments={refreshComments}/>
   </main>
   )
 }
