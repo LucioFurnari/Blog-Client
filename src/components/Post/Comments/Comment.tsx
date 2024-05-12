@@ -44,7 +44,7 @@ export default function Comment (commentProps: {
       childComments?.length > 0 && (
         <>
           <div className="ml-14">
-            <CommentList postId={commentProps.postId} comments={childComments} group={commentProps.group} getReplies={commentProps.getReplies} />
+            <CommentList comments={childComments} group={commentProps.group} getReplies={commentProps.getReplies} />
           </div>
         </>
       )
