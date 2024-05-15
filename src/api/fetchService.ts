@@ -76,7 +76,7 @@ export async function getPosts() {
 // Function to get a single post
 export async function getPost(postId: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL_DEV+Endpoints.Posts+'/'+postId, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export async function getPost(postId: string) {
 // Function to get all the comments of a post
 export async function getComments(postId: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL_DEV+Endpoints.Posts+'/'+postId+Endpoints.Comments, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
