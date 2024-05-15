@@ -1,3 +1,5 @@
+import { getToken } from "@/components/actions";
+
 enum Endpoints {
   Login = 'login',
   Register = 'register',
@@ -107,5 +109,26 @@ export async function getComments(postId: string) {
     return data;
   } catch (error) {
     
+  }
+}
+
+// Create new comment
+export async function postComment(postId: string, commentContent: string) {
+  try {
+    const token = await getToken();
+    await fetch(process.env.NEXT_PUBLIC_API_URL_DEV+Endpoints.Posts+'/'+postId+Endpoints.Comments, {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + token,
+      }),
+      body: JSON.stringify({
+        text: commentContent,
+        //todo: Change this or change in the API
+        timestamp: '24 de Diciembre',
+      })
+    })
+  } catch (error) {
+    console.error(error);
   }
 }
