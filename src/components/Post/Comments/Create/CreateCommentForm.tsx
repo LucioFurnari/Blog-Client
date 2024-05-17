@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { getToken } from "@/components/actions"
+import { getToken, createComment } from "@/components/actions"
 import { UserContext } from "@/app/context/UserContext";
 
 export default function CreateCommentForm(props: { postId: string, setRefresh: (value: any) => void}) {
@@ -12,32 +12,17 @@ export default function CreateCommentForm(props: { postId: string, setRefresh: (
     setCommentContent(event.currentTarget.value)
   }
 
-  //todo: Move this function
-  async function createComment(event: any) {
+  function handleCreateComment(event: any) {
     event.preventDefault();
-    try {
-      const token = await getToken()
-      await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'authorization': 'Bearer ' + token,
-        }),
-        body: JSON.stringify({
-          text: commentContent,
-          //todo: Change this or change in the API
-          timestamp: '24 de Diciembre',
-        })
-      })
+    createComment(postId, commentContent)
+    .then(() => {
       setRefresh((value: boolean) => !value)
-    } catch (error) {
-      console.log(error);
-    }
+    })
   }
 
   return(
     <div>
-      <form onSubmit={createComment}>
+      <form onSubmit={handleCreateComment}>
         <textarea
           className="p-2 px-4 my-4 block bg-transparent border-[1px] border-white rounded-md min-h-32 w-80"
           onChange={handleCommentContent}
