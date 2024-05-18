@@ -113,7 +113,7 @@ export async function getComments(postId: string) {
 }
 
 // Create new comment
-export async function postComment(postId: string, commentContent: string) {
+export async function postComment(postId: string, commentContent: string, replyUserId: null | string = null) {
   try {
     const token = await getToken();
     await fetch(process.env.NEXT_PUBLIC_API_URL_DEV+Endpoints.Posts+'/'+postId+Endpoints.Comments, {
@@ -124,6 +124,7 @@ export async function postComment(postId: string, commentContent: string) {
       }),
       body: JSON.stringify({
         text: commentContent,
+        response_to: replyUserId,
         //todo: Change this or change in the API
         timestamp: '24 de Diciembre',
       })

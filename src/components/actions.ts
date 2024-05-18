@@ -44,6 +44,6 @@ export async function getNewComments(postId: string) {
   return newComments;
 }
 
-export async function createComment(postId:string, commentContent: string) {
+export async function createComment(postId:string, commentContent: string, replyUserId: null | string = null) {
   postComment(postId, commentContent);
 }
