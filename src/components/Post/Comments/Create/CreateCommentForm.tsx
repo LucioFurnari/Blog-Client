@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { getToken, createComment } from "@/components/actions"
+import { createComment } from "@/components/actions"
 import { UserContext } from "@/app/context/UserContext";
 
 export default function CreateCommentForm(props: { postId: string, setRefresh: (value: any) => void}) {
