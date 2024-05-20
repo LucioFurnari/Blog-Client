@@ -1,7 +1,7 @@
 'use client'
 
 import { UserContext } from "@/app/context/UserContext";
-import { useMemo, useState, useContext } from "react";
+import { useMemo, useState, useContext, useEffect } from "react";
 import CommentsContainer from "./Comments/CommentsContainer";
 import CreateComment from "./Comments/CreateComment";
 import { JSONContent, generateHTML } from "@tiptap/react";
@@ -18,7 +18,10 @@ export default function PostPage (props: {
 ) {
   const {title, author, text,body, id} = props;
   const { setPostId } = useContext(UserContext);
-  setPostId(id);
+
+  useEffect(() => {
+    setPostId(id);
+  }, [id])
 
   const output = useMemo(() => {
     if (props.body) {
