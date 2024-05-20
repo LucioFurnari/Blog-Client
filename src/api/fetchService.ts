@@ -1,11 +1,11 @@
 import { getToken } from "@/components/actions";
 
 enum Endpoints {
-  Login = 'login',
-  Register = 'register',
-  Session = 'session',
-  Posts = 'posts',
-  Comments = 'comments'
+  Login = '/login',
+  Register = '/register',
+  Session = '/session',
+  Posts = '/posts',
+  Comments = '/comments'
 }
 
 // Function to login user
