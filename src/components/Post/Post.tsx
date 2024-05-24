@@ -16,7 +16,7 @@ export default function PostPage (props: {
   id: string,
 },
 ) {
-  const {title, author, text,body, id} = props;
+  const {title, author, text, body, id} = props;
   const { setPostId } = useContext(UserContext);
 
   useEffect(() => {
@@ -24,17 +24,17 @@ export default function PostPage (props: {
   }, [id])
 
   const output = useMemo(() => {
-    if (props.body) {
-      return generateHTML(props.body, [
+    if (body) {
+      return generateHTML(body, [
         StarterKit
       ])
     }
-  }, [props.body]);
+  }, [body]);
 
   const [refreshComments, setRefreshComments] = useState(false);
 
   return (
-  <main className=" px-96 min-h-96">
+  <main className="px-96 py-20 min-h-96">
     <h1 className="text-4xl">{title}</h1>
     <p>Author: <span>{author}</span></p>
     <div className="my-10 prose dark:prose-invert prose-sm text-white ">
